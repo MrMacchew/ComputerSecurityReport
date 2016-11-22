@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="computerReport">
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Local Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Local Javascript Files -->
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="container" ng-controller="ReportController as report">
+      <div class="jumbotron">
+        <h1>{{ "Hello Computer Report!"}}</h1>
+      </div>
+    <div class='row'>
+      <div class='col-sm-6 col-md-4'>
+        Input Graph Here
+      </div>
+      <div class='col-sm-6 col-md-4'>
+        Input Graph 2 Here
+      </div>
+      <div class='col-md-4'>
+        Input Graph 3 Here
+      </div>
+    </div>
+    <div class='row'>
+      <table class="table table-striped">
+      <tr>
+        <th>
+          Computer Name
+        </th>
+        <th>IDF</th>
+        <th>SCEP</th>
+      </tr>
+      <tr ng-repeat="computer in report.computers">
+        <td>{{computer.name}}</td>
+        <td class="success" ng-If="(computer.IDF == true || computer.lab == true)">Okay</td>
+        <td class="danger" ng-If="(computer.IDF == false && computer.lab == false)">Missing</td>
+        <td class="success" ng-If="computer.SCEP == true">Okay</td>
+        <td class="danger" ng-If="computer.SCEP == false">Missing</td>
+      </tr>
+    </table>
+    </div>
+    </body>
+</html>
