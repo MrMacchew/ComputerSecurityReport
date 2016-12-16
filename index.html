@@ -15,24 +15,29 @@
 
     <!-- Local Javascript Files -->
     <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="Chart.bundle.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
-
-
+    <!--<script type="text/javascript" src="graph.js"></script>-->
   </head>
   <body>
     <div class="container" ng-controller="ReportController as report">
       <div class="jumbotron">
         <h1>{{ "Hello Computer Report!"}}</h1>
+        <h3>There are {{ report.computers.length }} computers being reported</h3>
       </div>
     <div class='row'>
-      <div class='col-sm-6 col-md-4'>
+      <div class='col-sm-6 col-md-3 well'>
+        <canvas id="idfChart"></canvas>
         Input Graph Here
       </div>
-      <div class='col-sm-6 col-md-4'>
+      <div class='col-sm-6 col-md-3 well'>
         Input Graph 2 Here
       </div>
-      <div class='col-md-4'>
+      <div class='col-md-3 well'>
         Input Graph 3 Here
+      </div>
+      <div class='col-md-3 well'>
+        Input Graph 4 Here
       </div>
     </div>
     <div class='row'>
@@ -41,11 +46,13 @@
         <th>
           Computer Name
         </th>
+        <th>College / Department</th>
         <th>IDF</th>
         <th>SCEP</th>
       </tr>
       <tr ng-repeat="computer in report.computers">
         <td>{{computer.name}}</td>
+        <td>{{computer.college}}</td>
         <td class="success" ng-If="(computer.IDF == true || computer.lab == true)">Okay</td>
         <td class="danger" ng-If="(computer.IDF == false && computer.lab == false)">Missing</td>
         <td class="success" ng-If="computer.SCEP == true">Okay</td>
@@ -54,4 +61,5 @@
     </table>
     </div>
     </body>
+
 </html>
