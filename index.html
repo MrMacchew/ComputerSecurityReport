@@ -3,6 +3,7 @@
   <head>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"
 
     <!-- Local Stylesheets -->
     <link rel="stylesheet" href="styles.css">
@@ -10,12 +11,15 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+    <!-- Datatable Library -->
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Local Javascript Files -->
     <script type="text/javascript" src="angular.min.js"></script>
-    <script type="text/javascript" src="Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="jquery.circliful.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <!--<script type="text/javascript" src="graph.js"></script>-->
   </head>
@@ -26,18 +30,17 @@
         <h3>There are {{ report.computers.length }} computers being reported</h3>
       </div>
     <div class='row'>
-      <div class='col-sm-6 col-md-3 well'>
-        <canvas id="idfChart"></canvas>
-        Input Graph Here
+      <div class='col-sm-6 col-md-4 well'>
+        <div id="idfChart"></div>
+        <h2>Identity Finder</h2>
       </div>
-      <div class='col-sm-6 col-md-3 well'>
-        Input Graph 2 Here
+      <div class='col-sm-6 col-md-4 well'>
+        <div id="scepChart"></div>
+        <h2>SCEP</h2>
       </div>
-      <div class='col-md-3 well'>
-        Input Graph 3 Here
-      </div>
-      <div class='col-md-3 well'>
-        Input Graph 4 Here
+      <div class='col-md-4 well'>
+        <div id="labChart"></div>
+        <h2>Lab Chart</h2>
       </div>
     </div>
     <div class='row'>
@@ -47,17 +50,30 @@
           Computer Name
         </th>
         <th>College / Department</th>
+        <th>Operating System</th>
         <th>IDF</th>
         <th>SCEP</th>
       </tr>
       <tr ng-repeat="computer in report.computers">
         <td>{{computer.name}}</td>
         <td>{{computer.college}}</td>
+        <td>{{computer.os}}</td>
         <td class="success" ng-If="(computer.IDF == true || computer.lab == true)">Okay</td>
         <td class="danger" ng-If="(computer.IDF == false && computer.lab == false)">Missing</td>
         <td class="success" ng-If="computer.SCEP == true">Okay</td>
         <td class="danger" ng-If="computer.SCEP == false">Missing</td>
       </tr>
+    </table>
+    <table id="computerTable">
+      <thead>
+        <tr>
+          <th>College</th>
+          <th>Name</th>
+          <th>Operating System</th>
+          <th>IDF</th>
+          <th>SCEP</th>
+        </tr>
+      </thead>
     </table>
     </div>
     </body>
