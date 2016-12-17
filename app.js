@@ -15,9 +15,25 @@ var computers = [{
   college: "IT"
 },
 {
+  name: 'myPCVM1',
+  IDF: true,
+  SCEP: true,
+  os: "Windows 7 Enterprise SP1",
+  lab: false,
+  college: "IT"
+},
+{
+  name: 'myPCVM2',
+  IDF: true,
+  SCEP: true,
+  os: "Windows 7 Enterprise SP1",
+  lab: false,
+  college: "IT"
+},
+{
   name: 'mylabVM2',
   IDF: false,
-  SCEP: true,
+  SCEP: false,
   os: "Windows 10 Enterprise Build 1607",
   lab: true,
   college: "IT"
@@ -79,10 +95,10 @@ function goGraph(el, percentage, myColor){
   $(el).circliful({
     animation: 1,
     animationStep: 1,
-    backgroundColor: '#000',
     foregroundColor: myColor,
     percent: percentage,
     fontColor: '#000',
-    fontSize: '40'
+    fontSize: '40',
+    halfCircle: true
   })
 }
