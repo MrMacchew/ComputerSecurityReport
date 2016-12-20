@@ -31,6 +31,62 @@ var computers = [{
   college: "IT"
 },
 {
+  name: 'mySOCVM1',
+  IDF: true,
+  SCEP: true,
+  os: "Windows 7 Enterprise SP1",
+  lab: false,
+  college: "SOC"
+},
+{
+  name: 'mySOCVM2',
+  IDF: true,
+  SCEP: true,
+  os: "Windows 7 Enterprise SP1",
+  lab: false,
+  college: "SOC"
+},
+{
+  name: 'mySAVM1',
+  IDF: false,
+  SCEP: true,
+  os: "Windows 10 Enterprise Build 1607",
+  lab: true,
+  college: "SA"
+},
+{
+  name: 'mySAVM2',
+  IDF: false,
+  SCEP: true,
+  os: "Windows 10 Enterprise Build 1607",
+  lab: true,
+  college: "SA"
+},
+{
+  name: 'mySAVM3',
+  IDF: false,
+  SCEP: true,
+  os: "Windows 10 Enterprise Build 1607",
+  lab: true,
+  college: "SA"
+},
+{
+  name: 'mySAVM4',
+  IDF: false,
+  SCEP: true,
+  os: "Windows 10 Enterprise Build 1607",
+  lab: true,
+  college: "SA"
+},
+{
+  name: 'myPCVM2',
+  IDF: true,
+  SCEP: true,
+  os: "Windows 7 Enterprise SP1",
+  lab: false,
+  college: "IT"
+},
+{
   name: 'mylabVM2',
   IDF: false,
   SCEP: false,
@@ -76,22 +132,38 @@ $( document ).ready(function(){
     fontSize: '40'
   });*/
   count = getCount(computers);
-  goGraph('#idfChart', count['idf']* 10, 'blue');
-  goGraph('#scepChart', count['scep']* 10, 'green' );
-  goGraph('#labChart', count['lab'] * 10, 'purple');
+  goGraph('#idfChart', (count['idf']/computers.length)*100, 'blue', 'Identity Finder');
+  goGraph('#scepChart', (count['scep']/computers.length)*100, 'green', 'SCEP / Antivirus' );
+  goGraph('#labChart', (count['lab']/computers.length)*100, 'purple', "Lab Computers");
   $('#computerTable').DataTable({
     data: computers,
+    bAutoWidth:false,
     columns: [
       { data: 'college' },
       { data: 'name' },
       { data: 'os'},
       { data: 'SCEP'},
-      {  data: 'IDF'}
+      { data: 'IDF'},
+      { data: 'lab'}
     ]
   });
+  warningSet();
 });
 
-function goGraph(el, percentage, myColor){
+function warningSet(){
+  //console.log("warningSet() Fired off");
+  $("td").each(function(){
+    //console.log("TD Value checked" + $(this).text());
+    if($(this).text() === "true"){
+      $(this).addClass("success");
+    }
+    if($(this).text() === "false"){
+      $(this).addClass("danger");
+    }
+  });
+}
+
+function goGraph(el, percentage, myColor, myText){
   $(el).circliful({
     animation: 1,
     animationStep: 1,
@@ -99,6 +171,7 @@ function goGraph(el, percentage, myColor){
     percent: percentage,
     fontColor: '#000',
     fontSize: '40',
-    halfCircle: true
+    halfCircle: true,
+    text: myText
   })
 }
