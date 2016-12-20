@@ -9,9 +9,13 @@
 
 .weberfy {
   background-color: #492365;
-
+  padding-left: 50px;
   color: white;
 
+}
+
+.centered {
+  margin: 0 auto;
 }
 
 .weberfy-font * {

@@ -24,62 +24,75 @@
     <!--<script type="text/javascript" src="graph.js"></script>-->
   </head>
   <body>
-    <div class="container" ng-controller="ReportController as report">
+    <div ng-controller="ReportController as report">
       <div class="jumbotron weberfy">
-        <h1 class="weberfy-font">{{ "Weber State University" }} <br/> {{ "Computer Report!"}}</h1>
+        <h1 class="weberfy-font">{{ "Weber State University Computer Report!"}}</h1>
         <h3 class="center">There are {{ report.computers.length }} computers being reported</h3>
       </div>
-      <div class='row'>
-        <div class='col-sm-offset-0 col-sm-12 col-md-4 col-lg-3 well' id="chart1">
-          <div id="idfChart"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 page-header col-md-offset-5 col-md-2"><h3>{{ "College Name Template "}}</h3></div>
         </div>
-        <div class='col-sm-12 col-lg-3 col-md-4 col-lg-offset-1 well'>
-          <div id="scepChart"></div>
+        <div class='row'>
+          <div class='col-sm-offset-0 col-sm-12 col-md-4 col-lg-3 well' id="chart1">
+            <div id="idfChart"></div>
+          </div>
+          <div class='col-sm-12 col-lg-3 col-md-4 col-lg-offset-1 well'>
+            <div id="scepChart"></div>
+          </div>
+          <div class='col-sm-12 col-lg-3 col-md-4 col-lg-offset-1 well'>
+            <div id="labChart"></div>
+          </div>
         </div>
-        <div class='col-sm-12 col-lg-3 col-md-4 col-lg-offset-1 well'>
-          <div id="labChart"></div>
-        </div>
-      </div>
-      <div class='row'>
-        <section ng-init="tab = 1">
-          <ul class="nav nav-pills">
-            <li ng-class="{ active:tab === 1 }"> <a href ng-click="tab = 1">Angular Table</a></li>
-            <li ng-class="{ active:tab === 2 }"> <a href ng-click="tab = 2">DataTable</a></li>
-          </ul>
-        </section>
-        <div ng-show="tab===1">
-            <table class="table table-striped">
-            <tr>
-              <th>Computer Name</th>
-              <th>College / Department</th>
-              <th>Operating System</th>
-              <th>IDF</th>
-              <th>SCEP</th>
-            </tr>
-            <tr ng-repeat="computer in report.computers">
-              <td>{{computer.name}}</td>
-              <td>{{computer.college}}</td>
-              <td>{{computer.os}}</td>
-              <td class="success" ng-If="(computer.IDF == true || computer.lab == true)">Okay</td>
-              <td class="danger" ng-If="(computer.IDF == false && computer.lab == false)">Missing</td>
-              <td class="success" ng-If="computer.SCEP == true">Okay</td>
-              <td class="danger" ng-If="computer.SCEP == false">Missing</td>
-            </tr>
+        <div class='row'>
+          <section ng-controller="TabController as panel">
+            <ul class="nav nav-pills">
+              <li ng-class="{ active:panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">Angular Table</a></li>
+              <li ng-class="{ active:panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">DataTable</a></li>
+            </ul>
+          <div ng-show="panel.isSelected(1)">
+              <label>Limit results to <select ng-model='panel.limit' >
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="50000">All</option>
+              </select>
+                Per Page
+              </label>
+              <table class="table table-striped">
+              <tr>
+                <th>Computer Name</th>
+                <th>College / Department</th>
+                <th>Operating System</th>
+                <th>IDF</th>
+                <th>SCEP</th>
+              </tr>
+              <tr ng-repeat="computer in report.computers | limitTo:panel.limit ">
+                <td>{{computer.name}}</td>
+                <td>{{computer.college}}</td>
+                <td>{{computer.os}}</td>
+                <td class="success" ng-If="(computer.IDF == true || computer.lab == true)">Okay</td>
+                <td class="danger" ng-If="(computer.IDF == false && computer.lab == false)">Missing</td>
+                <td class="success" ng-If="computer.SCEP == true">Okay</td>
+                <td class="danger" ng-If="computer.SCEP == false">Missing</td>
+              </tr>
+            </table>
+          </div>
+        <div class='col-xs-12' ng-show="panel.isSelected(2)" onclick="warningSet()">
+          <table id="computerTable" class="table" >
+            <thead>
+              <tr>
+                <th>College</th>
+                <th>Name</th>
+                <th>Operating System</th>
+                <th>IDF</th>
+                <th>SCEP</th>
+                <th>lab</th>
+              </tr>
+            </thead>
           </table>
         </div>
-      <div class='col-xs-12' ng-show="tab === 2" onclick="warningSet()">
-        <table id="computerTable" class="table" >
-          <thead>
-            <tr>
-              <th>College</th>
-              <th>Name</th>
-              <th>Operating System</th>
-              <th>IDF</th>
-              <th>SCEP</th>
-              <th>lab</th>
-            </tr>
-          </thead>
-        </table>
+        </section>
       </div>
     </div>
   </body>

@@ -75,7 +75,7 @@ var computers = [{
   IDF: false,
   SCEP: true,
   os: "Windows 10 Enterprise Build 1607",
-  lab: true,
+  lab: false,
   college: "SA"
 },
 {
@@ -91,7 +91,7 @@ var computers = [{
   IDF: false,
   SCEP: false,
   os: "Windows 10 Enterprise Build 1607",
-  lab: true,
+  lab: false,
   college: "IT"
 }];
 
@@ -100,6 +100,17 @@ var computers = [{
   var app = angular.module('computerReport', []);
   app.controller('ReportController', function(){
     this.computers = computers;
+  });
+  app.controller('TabController', function(){
+    this.tab = 1;
+    this.limit = 10;
+    this.selectTab = function(setTab) {
+      this.tab = setTab;
+    }
+
+    this.isSelected =  function(checkTab){
+      return this.tab === checkTab;
+    }
   });
 })();
 
@@ -114,7 +125,7 @@ function getCount(arr){
       count['scep'] += 1;
     };
     if (arr[i].lab) { count['lab']++; };
-    if (arr[i].IDF) { count['idf']++; };
+    if (arr[i].IDF || arr[i].lab) { count['idf']++; };
   };
   return count;
 }
