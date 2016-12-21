@@ -209,12 +209,11 @@ function warningSet(){
 function goGraph(el, percentage, myColor, myText){
   $(el).circliful({
     animation: 1,
-    animationStep: 1,
+    animationStep: 5,
     foregroundColor: myColor,
     percent: percentage,
     fontColor: '#000',
     fontSize: '40',
-    halfCircle: true,
     text: myText
   })
 }
