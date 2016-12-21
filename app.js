@@ -87,6 +87,38 @@ var computers = [{
   college: "IT"
 },
 {
+  name: 'myEDUVM1',
+  IDF: false,
+  SCEP: true,
+  os: "Mac OS 10.12.2",
+  lab: false,
+  college: "EDU"
+},
+{
+  name: 'myEDUVM2',
+  IDF: false,
+  SCEP: false,
+  os: "Mac OS 10.12.2",
+  lab: false,
+  college: "EDU"
+},
+{
+  name: 'myEDUVM3',
+  IDF: false,
+  SCEP: true,
+  os: "Mac OS 10.12.2",
+  lab: false,
+  college: "EDU"
+},
+{
+  name: 'myEDUVM4',
+  IDF: false,
+  SCEP: true,
+  os: "Mac OS 10.12.2",
+  lab: true,
+  college: "EDU"
+},
+{
   name: 'mylabVM2',
   IDF: false,
   SCEP: false,

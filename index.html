@@ -27,11 +27,10 @@
     <div ng-controller="ReportController as report">
       <div class="jumbotron weberfy">
         <h1 class="weberfy-font">{{ "Weber State University Computer Report!"}}</h1>
-        <h3 class="center">There are {{ report.computers.length }} computers being reported</h3>
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 page-header col-md-offset-5 col-md-2"><h3>{{ "College Name Template "}}</h3></div>
+          <div class="col-xs-12 page-header col-md-offset-4 col-md-4"><h3 class="center">{{ "College Name Template "}}</h3></div>
         </div>
         <div class='row'>
           <div class='col-sm-offset-0 col-sm-12 col-md-4 col-lg-3 well' id="chart1">
@@ -44,13 +43,17 @@
             <div id="labChart"></div>
           </div>
         </div>
+        <div class='row'><div class='col-xs-12 col-sm-offset-5 col-sm-4'><h4 class="center">{{ report.computers.length }} Total Computers</h4></div></div>
+
         <div class='row'>
           <section ng-controller="TabController as panel">
+            <div class='col-xs-12 col-sm-3'>
             <ul class="nav nav-pills">
               <li ng-class="{ active:panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">Angular Table</a></li>
               <li ng-class="{ active:panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">DataTable</a></li>
             </ul>
-          <div ng-show="panel.isSelected(1)">
+            </div>
+            <div class='col-sm-offset-6 col-sm-3' ng-show="panel.isSelected(1)">
               <label>Limit results to <select ng-model='panel.limit' >
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -59,6 +62,9 @@
               </select>
                 Per Page
               </label>
+            </div>
+          <div class='row'>
+          <div ng-show="panel.isSelected(1)">
               <table class="table table-striped">
               <tr>
                 <th>Computer Name</th>
